@@ -41,17 +41,12 @@ common lang
     -Wunused-packages -Wmissing-deriving-strategies -fobject-code
     -fno-ignore-interface-pragmas -fno-omit-interface-pragmas
 
-common ghc-version-support
-  -- See the section on GHC versions in CONTRIBUTING
-  if (impl(ghc <9.6) || impl(ghc >=9.7))
-    buildable: False
-
 common os-support
   if (impl(ghcjs) || os(windows))
     buildable: False
 
 library
-  import:          lang, ghc-version-support, os-support
+  import:          lang, os-support
   hs-source-dirs:  src
   exposed-modules:
     PlutusTx.Compiler.Error
@@ -91,7 +86,7 @@ library
     , uniplate
 
 executable gen-plugin-opts-doc
-  import:           lang, ghc-version-support, os-support
+  import:           lang, os-support
   main-is:          GeneratePluginOptionsDoc.hs
   hs-source-dirs:   app
   ghc-options:      -threaded -rtsopts -with-rtsopts=-N
@@ -108,7 +103,7 @@ executable gen-plugin-opts-doc
   default-language: Haskell2010
 
 test-suite plutus-tx-plugin-tests
-  import:             lang, ghc-version-support, os-support
+  import:             lang, os-support
   type:               exitcode-stdio-1.0
   hs-source-dirs:     test
   main-is:            Spec.hs
@@ -195,7 +190,7 @@ test-suite plutus-tx-plugin-tests
     -fno-unbox-small-strict-fields -fno-full-laziness
 
 test-suite size
-  import:             lang, ghc-version-support, os-support
+  import:             lang, os-support
 
   -- needs plutus-tx-plugin but it looks unused
   ghc-options:        -Wno-unused-packages
