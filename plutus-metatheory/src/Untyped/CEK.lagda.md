@@ -571,6 +571,10 @@ BUILTIN expModInteger = λ
      }
   ; _ -> inj₁ userError
   }
+BUILTIN schnorrkel = λ
+  { (app base (V-con bytestring b)) -> inj₂ (V-con bytestring (SCHNORRKEL b))
+  ; _ -> inj₁ userError
+  }
 
 -- Take an apparently more general index and show that it is a fully applied builtin.
 mkFullyAppliedBuiltin : ∀ { b }

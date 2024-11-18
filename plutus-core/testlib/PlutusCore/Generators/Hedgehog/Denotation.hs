@@ -144,5 +144,6 @@ typedBuiltins
     . insertBuiltin Blake2b_256
     . insertBuiltin Keccak_256
     . insertBuiltin Ripemd_160
+    . insertBuiltin Schnorrkel
     . insertBuiltin EqualsByteString
     $ DenotationContext mempty

@@ -259,6 +259,10 @@ keccak_256 (BuiltinByteString b) = BuiltinByteString $ Hash.keccak_256 b
 ripemd_160 :: BuiltinByteString -> BuiltinByteString
 ripemd_160 (BuiltinByteString b) = BuiltinByteString $ Hash.ripemd_160 b
 
+{-# OPAQUE schnorrkel #-}
+schnorrkel :: BuiltinByteString -> BuiltinByteString
+schnorrkel (BuiltinByteString b) = BuiltinByteString $ Hash.schnorrkel b
+
 {-# OPAQUE verifyEd25519Signature #-}
 verifyEd25519Signature :: BuiltinByteString -> BuiltinByteString -> BuiltinByteString -> BuiltinBool
 verifyEd25519Signature (BuiltinByteString vk) (BuiltinByteString msg) (BuiltinByteString sig) =

@@ -80,6 +80,7 @@ isCommutative = \case
   Blake2b_256                     -> False
   Keccak_256                      -> False
   Ripemd_160                      -> False
+  Schnorrkel                      -> False
   VerifyEd25519Signature          -> False
   VerifyEcdsaSecp256k1Signature   -> False
   VerifySchnorrSecp256k1Signature -> False

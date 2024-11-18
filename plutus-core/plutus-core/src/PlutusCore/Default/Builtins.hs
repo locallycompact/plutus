@@ -171,6 +171,7 @@ data DefaultFun
     -- Ripemd_160
     | Ripemd_160
     | ExpModInteger
+    | Schnorrkel
     deriving stock (Show, Eq, Ord, Enum, Bounded, Generic, Ix)
     deriving anyclass (NFData, Hashable, PrettyBy PrettyConfigPlc)
 
@@ -2004,6 +2005,14 @@ instance uni ~ DefaultUni => ToBuiltinMeaning uni DefaultFun where
             expModIntegerDenotation
             (runCostingFunThreeArguments . paramExpModInteger)
 
+    toBuiltinMeaning _semvar Schnorrkel =
+        let schnorrkelDenotation :: BS.ByteString -> BS.ByteString
+            schnorrkelDenotation = Hash.schnorrkel
+            {-# INLINE schnorrkelDenotation #-}
+        in makeBuiltinMeaning
+            schnorrkelDenotation
+            (runCostingFunOneArgument . paramSchnorrkel)
+
     -- See Note [Inlining meanings of builtins].
     {-# INLINE toBuiltinMeaning #-}
 
@@ -2146,6 +2155,8 @@ instance Flat DefaultFun where
 
               ExpModInteger           -> 87
 
+              Schnorrkel                      -> 88
+
     decode = go =<< decodeBuiltin
         where go 0  = pure AddInteger
               go 1  = pure SubtractInteger
@@ -2235,6 +2246,7 @@ instance Flat DefaultFun where
               go 85 = pure FindFirstSetBit
               go 86 = pure Ripemd_160
               go 87 = pure ExpModInteger
+              go 88 = pure Schnorrkel
               go t  = fail $ "Failed to decode builtin tag, got: " ++ show t
 
     size _ n = n + builtinTagWidth

@@ -125,6 +125,7 @@ builtinCostModelNames = BuiltinCostModelBase
   , paramFindFirstSetBit                 = "findFirstSetBitModel"
   , paramRipemd_160                      = "ripemd_160Model"
   , paramExpModInteger                   = "expModIntegerModel"
+  , paramSchnorrkel                      = "schnorrkelModel"
   }
 
 
@@ -265,6 +266,7 @@ createBuiltinCostModel bmfile rfile = do
   -- And another hash function
   paramRipemd_160                      <- getParams readCF1 paramRipemd_160
   paramExpModInteger                   <- getParams readCF3 paramExpModInteger
+  paramSchnorrkel                      <- getParams readCF1 paramSchnorrkel
 
   pure $ BuiltinCostModelBase {..}
 

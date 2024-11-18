@@ -132,6 +132,7 @@ arity <- function(name) {
         "Blake2b_224" = 1,
         "Ripemd_160" = 1,
         "ExpModInteger" = 3,
+        "Schnorrkel" = 1,
         "IntegerToByteString" = 3,
         "ByteStringToInteger" = 2,
         "AndByteString" = 3,
@@ -574,6 +575,7 @@ modelFun <- function(path) {
     blake2b_256Model <- linearInX ("Blake2b_256")
     keccak_256Model  <- linearInX ("Keccak_256")
     ripemd_160Model  <- linearInX ("Ripemd_160")
+    schnorrkelModel  <- linearInX ("Schnorrkel")
 
     ###### Signature verification #####
 
