@@ -21,6 +21,7 @@ module PlutusTx.Builtins (
                          , blake2b_256
                          , keccak_256
                          , ripemd_160
+                         , schnorrkel
                          , verifyEd25519Signature
                          , verifyEcdsaSecp256k1Signature
                          , verifySchnorrSecp256k1Signature
@@ -207,6 +208,11 @@ keccak_256 = BI.keccak_256
 ripemd_160 :: BuiltinByteString -> BuiltinByteString
 ripemd_160 = BI.ripemd_160
 {-# INLINABLE ripemd_160 #-}
+
+-- | The SCHNORRKEL hash of a 'ByteString'
+schnorrkel :: BuiltinByteString -> BuiltinByteString
+schnorrkel = BI.schnorrkel
+{-# INLINABLE schnorrkel #-}
 
 -- | Ed25519 signature verification. Verify that the signature is a signature of
 -- the message by the public key. This will fail if key or the signature are not

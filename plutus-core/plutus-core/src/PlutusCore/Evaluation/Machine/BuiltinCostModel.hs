@@ -183,6 +183,7 @@ data BuiltinCostModelBase f =
     -- Ripemd_160
     , paramRipemd_160                      :: f ModelOneArgument
     , paramExpModInteger                   :: f ModelThreeArguments
+    , paramSchnorrkel                      :: f ModelOneArgument
     }
     deriving stock (Generic)
     deriving anyclass (FunctorB, TraversableB, ConstraintsB)

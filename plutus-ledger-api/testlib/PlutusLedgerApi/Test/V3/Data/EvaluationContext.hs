@@ -84,6 +84,7 @@ clearBuiltinCostModel r = r
                , paramFindFirstSetBit = mempty
                , paramRipemd_160 = mempty
                , paramExpModInteger = mempty
+               , paramSchnorrkel = mempty
                }
 
 
@@ -94,4 +95,5 @@ clearBuiltinCostModel' r = r
                { -- , paramIntegerToByteString = mempty -- Required for V2
                -- , paramByteStringToInteger = mempty -- Required for V2
                  paramExpModInteger = mempty
+               , paramSchnorrkel = mempty
                }

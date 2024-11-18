@@ -259,6 +259,10 @@ ripemd_160 :: BuiltinByteString -> BuiltinByteString
 ripemd_160 (BuiltinByteString b) = BuiltinByteString $ Hash.ripemd_160 b
 {-# OPAQUE ripemd_160 #-}
 
+schnorrkel :: BuiltinByteString -> BuiltinByteString
+schnorrkel (BuiltinByteString b) = BuiltinByteString $ Hash.schnorrkel b
+{-# OPAQUE schnorrkel #-}
+
 verifyEd25519Signature :: BuiltinByteString -> BuiltinByteString -> BuiltinByteString -> BuiltinBool
 verifyEd25519Signature (BuiltinByteString vk) (BuiltinByteString msg) (BuiltinByteString sig) =
   case PlutusCore.Crypto.Ed25519.verifyEd25519Signature_V1 vk msg sig of

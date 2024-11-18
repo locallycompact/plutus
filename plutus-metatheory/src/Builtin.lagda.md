@@ -147,6 +147,8 @@ data Builtin : Set where
   ripemd-160                      : Builtin
   -- Modular Exponentiation
   expModInteger                   : Builtin
+  -- Schnorrkel
+  schnorrkel                      : Builtin
 ```
 
 ## Signatures
@@ -264,6 +266,7 @@ sig n⋆ n♯ (t₃ ∷ t₂ ∷ t₁) tᵣ
     signature blake2b-256                     = ∙ [ bytestring ↑ ]⟶ bytestring ↑
     signature keccak-256                      = ∙ [ bytestring ↑ ]⟶ bytestring ↑
     signature ripemd-160                      = ∙ [ bytestring ↑ ]⟶ bytestring ↑
+    signature schnorrkel                      = ∙ [ bytestring ↑ ]⟶ bytestring ↑
     signature verifyEd25519Signature          = ∙ [ bytestring ↑ , bytestring ↑ , bytestring ↑ ]⟶ bool ↑
     signature verifyEcdsaSecp256k1Signature   = ∙ [ bytestring ↑ , bytestring ↑ , bytestring ↑ ]⟶ bool ↑
     signature verifySchnorrSecp256k1Signature = ∙ [ bytestring ↑ , bytestring ↑ , bytestring ↑ ]⟶ bool ↑
@@ -431,6 +434,7 @@ Each Agda built-in name must be mapped to a Haskell name.
                                           | FindFirstSetBit
                                           | Ripemd_160
                                           | ExpModInteger
+                                          | Schnorrkel
                                           ) #-}
 ```
 
@@ -629,6 +633,7 @@ postulate
     if m < 0
     then Nothing
     else fmap fromIntegral $ builtinResultToMaybe $ ExpMod.expMod b e (fromIntegral m) #-}
+{-# COMPILE GHC SCHNORRKEL = Hash.schnorrkel #-}
 
 -- no binding needed for appendStr
 -- no binding needed for traceStr

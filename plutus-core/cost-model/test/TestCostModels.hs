@@ -422,6 +422,7 @@ main =
               , $(genTest 1 "keccak_256")
               , $(genTest 1 "blake2b_224")
               , $(genTest 1 "ripemd_160")
+              , $(genTest 1 "schnorrkel")
 
               -- Bitwise operations
               , $(genTest 3 "integerToByteString")
