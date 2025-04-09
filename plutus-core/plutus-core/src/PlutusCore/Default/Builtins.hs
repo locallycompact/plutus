@@ -191,6 +191,9 @@ data DefaultFun
     | LengthOfArray
     | ListToArray
     | IndexArray
+    -- Sha 512
+    | Sha2_512
+    | Sha3_512
     deriving stock (Show, Eq, Ord, Enum, Bounded, Generic, Ix)
     deriving anyclass (NFData, Hashable, PrettyBy PrettyConfigPlc)
 
@@ -2142,7 +2145,25 @@ instance uni ~ DefaultUni => ToBuiltinMeaning uni DefaultFun where
                     -- message, so we don't need to repeat them here.
                 throwing _StructuralUnliftingError "Expected an array but got something else"
           {-# INLINE indexArrayDenotation #-}
-        in makeBuiltinMeaning indexArrayDenotation (runCostingFunTwoArguments . unimplementedCostingFun)
+      in makeBuiltinMeaning indexArrayDenotation (runCostingFunTwoArguments . unimplementedCostingFun)
+
+    -- Hydra Extras
+    toBuiltinMeaning _semvar Sha2_512 =
+        let sha2_512Denotation :: BS.ByteString -> BS.ByteString
+            sha2_512Denotation = Hash.sha2_512
+            {-# INLINE sha2_512Denotation #-}
+        in makeBuiltinMeaning
+            sha2_512Denotation
+            (runCostingFunOneArgument . paramSha2_512)
+
+    toBuiltinMeaning _semvar Sha3_512 =
+        let sha3_512Denotation :: BS.ByteString -> BS.ByteString
+            sha3_512Denotation = Hash.sha3_512
+            {-# INLINE sha3_512Denotation #-}
+        in makeBuiltinMeaning
+            sha3_512Denotation
+            (runCostingFunOneArgument . paramSha3_512)
+
 
     -- See Note [Inlining meanings of builtins].
     {-# INLINE toBuiltinMeaning #-}
@@ -2294,6 +2315,9 @@ instance Flat DefaultFun where
               LengthOfArray                   -> 91
               ListToArray                     -> 92
               IndexArray                      -> 93
+
+              Sha2_512                        -> 94
+              Sha3_512                        -> 95
 
     decode = go =<< decodeBuiltin
         where go 0  = pure AddInteger

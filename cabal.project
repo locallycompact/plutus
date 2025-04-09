@@ -113,3 +113,11 @@ if impl (ghc >= 9.12)
     -- Currently locked to nothunks ^>= 0.2 but ^>=0.3 would make this
     -- un-needed.
     , nothunks:time
+
+source-repository-package
+  type: git
+  location: https://github.com/locallycompact/cardano-base
+  tag: 551356522e0c00a82f13b00ce30038cccb138b44
+  --sha256: sha256-Hw5M7rVNS+LpBCtGQPL0Rk9/S2A2Q+v/zreXr65wS64=
+  subdir:
+    cardano-crypto-class
